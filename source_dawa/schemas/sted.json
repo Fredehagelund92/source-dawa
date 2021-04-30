@@ -1,0 +1,49 @@
+{
+    "name": "sted",
+    "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+    ],
+    "source_defined_cursor": true,
+    "cursor_field": "txid",
+    "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "hovedtype": {
+                "type": "string"
+            },
+            "undertype": {
+                "type": "string"
+            },
+            "bebyggelseskode": {
+                "type": "string"
+            },
+            "indbyggerantal": {
+                "type": "string"
+            },
+            "visueltcenter": {
+                "type": "string"
+            },
+            "bbox": {
+                "type": "string"
+            },
+            "geometri": {
+                "type": "string"
+            },
+            "txid": {
+                "type": "string"
+            },
+            "tidspunkt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "operation": {
+                "type": "string"
+            }
+        }
+    }
+}

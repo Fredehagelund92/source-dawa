@@ -1,0 +1,57 @@
+
+
+{
+  "streams": [
+    {
+      "stream": {
+        "name": "sted",
+        "supported_sync_modes": [
+          "full_refresh",
+          "incremental"
+        ],
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "hovedtype": {
+              "type": "string"
+            },
+            "undertype": {
+              "type": "string"
+            },
+            "bebyggelseskode": {
+              "type": "string"
+            },
+            "indbyggerantal": {
+              "type": "string"
+            },
+            "visueltcenter": {
+              "type": "string"
+            },
+            "bbox": {
+              "type": "string"
+            },
+            "geometri": {
+              "type": "string"
+            },
+            "txid": {
+              "type": "string"
+            },
+            "tidspunkt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "operation": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "sync_mode": "incremental",
+      "source_defined_cursor": true,
+      "destination_sync_mode": "overwrite"
+    }
+  ]
+}

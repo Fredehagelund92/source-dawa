@@ -1,0 +1,55 @@
+{
+    "name": "storkreds",
+    "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+    ],
+    "source_defined_cursor": true,
+    "cursor_field": "txid",
+    "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+            "ændret": {
+                "type": "string"
+            },
+            "geo_ændret": {
+                "type": "string"
+            },
+            "geo_version": {
+                "type": "string"
+            },
+            "visueltcenter": {
+                "type": "string"
+            },
+            "bbox": {
+                "type": "string"
+            },
+            "geometri": {
+                "type": "string"
+            },
+            "nummer": {
+                "type": "string"
+            },
+            "navn": {
+                "type": "string"
+            },
+            "regionskode": {
+                "type": "string"
+            },
+            "valglandsdelsbogstav": {
+                "type": "string"
+            },
+            "txid": {
+                "type": "string"
+            },
+            "tidspunkt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "operation": {
+                "type": "string"
+            }
+        }
+    }
+}

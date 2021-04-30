@@ -1,0 +1,64 @@
+{
+    "name": "navngivenvej",
+    "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+    ],
+    "source_defined_cursor": true,
+    "cursor_field": "txid",
+    "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "oprettet": {
+                "type": "string"
+            },
+            "ændret": {
+                "type": "string"
+            },
+            "navn": {
+                "type": "string"
+            },
+            "adresseringsnavn": {
+                "type": "string"
+            },
+            "administrerendekommune": {
+                "type": "string"
+            },
+            "beskrivelse": {
+                "type": "string"
+            },
+            "retskrivningskontrol": {
+                "type": "string"
+            },
+            "udtaltvejnavn": {
+                "type": "string"
+            },
+            "beliggenhed_oprindelse_kilde": {
+                "type": "string"
+            },
+            "beliggenhed_oprindelse_nøjagtighedsklasse": {
+                "type": "string"
+            },
+            "beliggenhed_oprindelse_registrering": {
+                "type": "string"
+            },
+            "beliggenhed_oprindelse_tekniskstandard": {
+                "type": "string"
+            },
+            "txid": {
+                "type": "string"
+            },
+            "tidspunkt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "operation": {
+                "type": "string"
+            }
+        }
+    }
+}

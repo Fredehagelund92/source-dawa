@@ -1,0 +1,50 @@
+{
+  "name": "vejstykke",
+  "supported_sync_modes": [
+    "full_refresh",
+    "incremental"
+  ],
+  "source_defined_cursor": true,
+  "cursor_field": "txid",
+  "json_schema": {
+    "title": "Subscriber List",
+    "description": "Information about a specific list.",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "kommunekode": {
+        "type": "string"
+      },
+      "kode": {
+        "type": "string"
+      },
+      "oprettet": {
+        "type": "string"
+      },
+      "ændret": {
+        "type": "string"
+      },
+      "navn": {
+        "type": "string"
+      },
+      "adresseringsnavn": {
+        "type": "string"
+      },
+      "navngivenvej_id": {
+        "type": "string"
+      },
+      "txid": {
+        "type": "string"
+      },
+      "tidspunkt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "operation": {
+          "type": "string"
+      }
+    }
+  }
+}

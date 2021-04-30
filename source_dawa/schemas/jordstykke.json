@@ -1,0 +1,85 @@
+{
+    "name": "jordstykke",
+    "supported_sync_modes": [
+        "full_refresh",
+        "incremental"
+    ],
+    "source_defined_cursor": true,
+    "cursor_field": "txid",
+    "json_schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+            "ejerlavkode": {
+                "type": "string"
+            },
+            "matrikelnr": {
+                "type": "string"
+            },
+            "kommunekode": {
+                "type": "string"
+            },
+            "regionskode": {
+                "type": "string"
+            },
+            "sognekode": {
+                "type": "string"
+            },
+            "retskredskode": {
+                "type": "string"
+            },
+            "esrejendomsnr": {
+                "type": "string"
+            },
+            "udvidet_esrejendomsnr": {
+                "type": "string"
+            },
+            "sfeejendomsnr": {
+                "type": "string"
+            },
+            "geometri": {
+                "type": "string"
+            },
+            "featureid": {
+                "type": "string"
+            },
+            "fælleslod": {
+                "type": "string"
+            },
+            "moderjordstykke": {
+                "type": "string"
+            },
+            "registreretareal": {
+                "type": "string"
+            },
+            "arealberegningsmetode": {
+                "type": "string"
+            },
+            "vejareal": {
+                "type": "string"
+            },
+            "vejarealberegningsmetode": {
+                "type": "string"
+            },
+            "vandarealberegningsmetode": {
+                "type": "string"
+            },
+            "visueltcenter": {
+                "type": "string"
+            },
+            "bbox": {
+                "type": "string"
+            },
+            "txid": {
+                "type": "string"
+            },
+            "tidspunkt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "operation": {
+                "type": "string"
+            }
+        }
+    }
+}
