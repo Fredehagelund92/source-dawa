@@ -112,8 +112,8 @@ class Client:
         _KOMMUNE,
         _KOMMUNETILKNYTNING,
         _LANDPOSTNUMMER,
-        # _MENIGHEDSRADSAFSTEMNINGSOMRADE,
-        # _MENIGHEDSRADSAFSTEMNINGSOMRADETILKNYTNING,
+        _MENIGHEDSRADSAFSTEMNINGSOMRADE,
+        _MENIGHEDSRADSAFSTEMNINGSOMRADETILKNYTNING,
         _OPSTILLINGSKREDS,
         _OPSTILLINGSKREDSTILKNYTNING,
         _POLITIKREDS,
@@ -171,7 +171,28 @@ class Client:
             properties[self.CDC_DELETED_AT] = {"type": "number"}
 
             streams.append(stream)
+
         return streams
+
+    def _format_columns(self, record, fields) -> Dict[str, any]:
+        record_dict = {**fields, **record}
+
+        # CDC columns
+        record_dict[self.CDC_LSN] = None
+        record_dict[self.CDC_UPDATED_AT] = None
+        record_dict[self.CDC_DELETED_AT] = None
+
+        # CDC row
+        if "operation" in record:
+            ab_cdc_datetime = datetime.strptime(record["tidspunkt"], "%Y-%m-%dT%H:%M:%S.%fZ")
+            ab_cdc_datetime_timestamp = ab_cdc_datetime.timestamp()
+
+            record_dict[self.CDC_LSN] = record["txid"]
+            record_dict[self.CDC_UPDATED_AT] = ab_cdc_datetime_timestamp
+            if record["operation"] == "delete":
+                record_dict[self.CDC_DELETED_AT] = ab_cdc_datetime_timestamp
+
+        return record_dict
 
     def get_records(self, catalog: ConfiguredAirbyteCatalog, logger: AirbyteLogger, state: Dict[str, any]):
         cursor_field = self.CDC_LSN
@@ -184,28 +205,22 @@ class Client:
                 logger.warn(f"Stream '{stream.name}' is not recognized in this source")
                 continue
 
+            # dict with all the columns
+            fields_dict = {}
+            for field in stream.json_schema["properties"]:
+                fields_dict[field] = None
+
             if configured_stream.sync_mode == SyncMode.incremental and cursor_field in state[stream.name]:
 
                 for record in self._client.replicate(stream.name, txidfra=state[stream.name][cursor_field], txidtil=txid):
+                    formatted_record = self._format_columns(record, fields_dict)
 
-                    ab_cdc_datetime = datetime.strptime(record["tidspunkt"], "%Y-%m-%dT%H:%M:%S.%fZ")
-                    ab_cdc_datetime_timestamp = ab_cdc_datetime.timestamp()
-
-                    record[self.CDC_DELETED_AT] = None
-                    if record["operation"] == "delete":
-                        record[self.CDC_DELETED_AT] = ab_cdc_datetime_timestamp
-
-                    record[self.CDC_LSN] = txid
-                    record[self.CDC_UPDATED_AT] = ab_cdc_datetime_timestamp
-
-                    yield self._record(stream=stream.name, data=record)
+                    yield self._record(stream=stream.name, data=formatted_record)
             else:
                 for record in self._client.replicate(stream.name):
-                    record[self.CDC_DELETED_AT] = None
-                    record[self.CDC_LSN] = None
-                    record[self.CDC_UPDATED_AT] = None
+                    formatted_record = self._format_columns(record, fields_dict)
 
-                    yield self._record(stream=stream.name, data=record)
+                    yield self._record(stream=stream.name, data=formatted_record)
 
             # Set new state
             # Add one cause SDK is inclusive

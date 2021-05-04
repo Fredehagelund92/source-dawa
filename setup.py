@@ -31,6 +31,6 @@ setup(
     author="Airbyte",
     author_email="contact@airbyte.io",
     packages=find_packages(),
-    install_requires=["airbyte-protocol", "base-python", "pytest==6.1.2", "dawa-sdk==0.2.1"],
+    install_requires=["airbyte-protocol", "base-python", "pytest==6.1.2", "dawa-sdk==0.2.4"],
     package_data={"": ["*.json", "schemas/*.json"]},
 )
