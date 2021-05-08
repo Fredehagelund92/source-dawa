@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+
 import pytest
 from source_dawa.client import Client
-
 
 
 @pytest.fixture()
@@ -32,13 +32,16 @@ def get_client():
     client = Client()
     return client
 
+
 @pytest.fixture()
 def get_api(get_client):
     return get_client._client
 
+
 def test_client_connection(get_client):
     status, error = get_client.health_check()
     assert status
+
 
 def test_client_getting_streams(get_client):
     streams = get_client.get_streams()
@@ -236,7 +239,9 @@ def test_client_dagi_postnummer(get_api):
 
 
 def test_client_menighedsrådsafstemningsområdetilknytning(get_api):
-    menighedsrådsafstemningsområdetilknytning = list(get_api.replicate("menighedsrådsafstemningsområdetilknytning", txidfra="3789366", txidtil="3789366"))
+    menighedsrådsafstemningsområdetilknytning = list(
+        get_api.replicate("menighedsrådsafstemningsområdetilknytning", txidfra="3789366", txidtil="3789366")
+    )
     assert isinstance(menighedsrådsafstemningsområdetilknytning, list)
 
 
