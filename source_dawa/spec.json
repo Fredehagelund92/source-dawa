@@ -4,12 +4,12 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Dawa Spec",
     "type": "object",
-    "required": ["fix-me"],
+    "required": [],
     "additionalProperties": false,
     "properties": {
-      "fix-me": {
+      "dummy": {
         "type": "string",
-        "description": "describe me"
+        "description": "no support for sources without configs"
       }
     }
   }

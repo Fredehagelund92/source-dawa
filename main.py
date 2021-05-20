@@ -21,27 +21,11 @@
 # SOFTWARE.
 
 
-from setuptools import find_packages, setup
+import sys
 
-MAIN_REQUIREMENTS = [
-    "airbyte-cdk",
-    "dawa-sdk==0.2.4"
-]
+from airbyte_cdk.entrypoint import launch
+from source_dawa import SourceDawa
 
-TEST_REQUIREMENTS = [
-    "pytest~=6.1",
-    "source-acceptance-test",
-]
-
-setup(
-    name="source_dawa",
-    description="Source implementation for Dawa.",
-    author="Airbyte",
-    author_email="contact@airbyte.io",
-    packages=find_packages(),
-    install_requires=MAIN_REQUIREMENTS,
-    package_data={"": ["*.json"]},
-    extras_require={
-        "tests": TEST_REQUIREMENTS,
-    },
-)
+if __name__ == "__main__":
+    source = SourceDawa()
+    launch(source, sys.argv[1:])

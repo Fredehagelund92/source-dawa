@@ -21,27 +21,14 @@
 # SOFTWARE.
 
 
-from setuptools import find_packages, setup
+import pytest
 
-MAIN_REQUIREMENTS = [
-    "airbyte-cdk",
-    "dawa-sdk==0.2.4"
-]
+pytest_plugins = ("source_acceptance_test.plugin",)
 
-TEST_REQUIREMENTS = [
-    "pytest~=6.1",
-    "source-acceptance-test",
-]
 
-setup(
-    name="source_dawa",
-    description="Source implementation for Dawa.",
-    author="Airbyte",
-    author_email="contact@airbyte.io",
-    packages=find_packages(),
-    install_requires=MAIN_REQUIREMENTS,
-    package_data={"": ["*.json"]},
-    extras_require={
-        "tests": TEST_REQUIREMENTS,
-    },
-)
+@pytest.fixture(scope="session", autouse=True)
+def connector_setup():
+    """ This fixture is a placeholder for external resources that acceptance test might require."""
+    # TODO: setup test dependencies
+    yield
+    # TODO: clean up test dependencies
